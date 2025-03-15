@@ -33,8 +33,8 @@ pipeline {
                 docker.image("${DOCKER_IMAGE}").inside('-u root') {
                     sh 'npm install -g eslint'
                     sh 'eslint .'
-                 }
-             }
+                  }
+                }
     
             }
         }
