@@ -3,9 +3,10 @@ pipeline {
     agent any
 
     environment {
+        DOCKER_IMAGE = 'node:14' // Specify the Node.js Docker image you want to use
         GIT_BRANCH = 'main'
         GIT_URL = 'https://github.com/Guilene01/nodejs-app.git'
-        NODE_VERSION = '14' // Specify the Node.js version you want to use
+        
     }
 
     stages {
@@ -15,14 +16,27 @@ pipeline {
                 git branch: "${GIT_BRANCH}", url: "${GIT_URL}"
             }
         }
-
-        stage('Install Dependencies') {
+        stage('Build and installDependencies') {
             steps {
-                // Install Node.js dependencies
-                sh 'npm install'
+                script {
+                    // Run the Node.js container for building and testing
+                    docker.image("${DOCKER_IMAGE}").inside('-u root') {
+                        sh 'npm install'
+                    }
+                }
             }
         }
-        stage('Run ESLint') {
+    }
+
+    post {
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+
+    stage('Run ESLint') {
             steps {
                 // Run ESLint for code linting
                 sh 'npx eslint .'
