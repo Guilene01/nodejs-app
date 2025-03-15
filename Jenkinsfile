@@ -22,6 +22,7 @@ pipeline {
                     // Run the Node.js container for building and testing
                     docker.image("${DOCKER_IMAGE}").inside('-u root') {
                         sh 'npm install'
+                        sh 'npm install standard --save-dev'
                     }
                 }
             }
@@ -43,8 +44,7 @@ pipeline {
                 script {
                 // Run ESLint for code linting
                 docker.image("${DOCKER_IMAGE}").inside('-u root') {
-                    sh 'npm install'
-                    sh 'npm run lint'
+                    sh 'npx standard'
                   }
                 }
     
