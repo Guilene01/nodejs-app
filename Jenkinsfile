@@ -26,13 +26,25 @@ pipeline {
                 }
             }
         }
-        stage('Run ESLint') {
+        /*stage('Run ESLint') {
             steps {
                 script {
                 // Run ESLint for code linting
                 docker.image("${DOCKER_IMAGE}").inside('-u root') {
                     sh 'npm install -g eslint'
                     sh 'eslint .'
+                  }
+                }
+    
+            }
+        }*/
+        stage('RunLint') {
+            steps {
+                script {
+                // Run ESLint for code linting
+                docker.image("${DOCKER_IMAGE}").inside('-u root') {
+                    sh 'npm install'
+                    sh 'npm run lint'
                   }
                 }
     
