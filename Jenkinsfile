@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'node:16' // Specify the Node.js Docker image you want to use
+        DOCKER_IMAGE = 'node:18' // Specify the Node.js Docker image you want to use
         GIT_BRANCH = 'main'
         GIT_URL = 'https://github.com/Guilene01/nodejs-app.git'
         
