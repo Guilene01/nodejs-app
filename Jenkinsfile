@@ -26,16 +26,6 @@ pipeline {
                 }
             }
         }
-    }
-
-    post {
-        success {
-            echo 'Pipeline succeeded!'
-        }
-        failure {
-            echo 'Pipeline failed!'
-        }
-
         stage('Run ESLint') {
             steps {
                 // Run ESLint for code linting
