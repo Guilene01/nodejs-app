@@ -29,7 +29,11 @@ pipeline {
         stage('Run ESLint') {
             steps {
                 // Run ESLint for code linting
-                sh 'npx eslint .'
+                docker.image("${DOCKER_IMAGE}").inside('-u root') {
+                    sh 'npm install -g eslint'
+                    sh 'eslint .'
+                }
+    
             }
         }
 
