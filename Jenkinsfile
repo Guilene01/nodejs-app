@@ -36,7 +36,7 @@ pipeline {
             echo 'Pipeline failed!'
         }
 
-    stage('Run ESLint') {
+        stage('Run ESLint') {
             steps {
                 // Run ESLint for code linting
                 sh 'npx eslint .'
