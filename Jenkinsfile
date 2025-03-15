@@ -7,6 +7,7 @@ pipeline {
         GIT_BRANCH = 'main'
         GIT_URL = 'https://github.com/Guilene01/nodejs-app.git'
         
+        
     }
 
     stages {
@@ -20,7 +21,7 @@ pipeline {
             steps {
                 script {
                     // Run the Node.js container for building and testing
-                    docker.image("${DOCKER_IMAGE}").inside('-u root') {
+                    docker.image("${DOCKER_IMAGE}").inside('-u 995:991') {
                         sh 'npm install'
                         sh 'npm install standard --save-dev'
                     }
@@ -31,7 +32,7 @@ pipeline {
             steps {
                 script {
                 // Run ESLint for code linting
-                docker.image("${DOCKER_IMAGE}").inside('-u root') {
+                docker.image("${DOCKER_IMAGE}").inside('-u 995:991') {
                     sh 'npm install -g eslint'
                     sh 'eslint .'
                   }
@@ -43,7 +44,7 @@ pipeline {
             steps {
                 script {
                 // Run ESLint for code linting
-                docker.image("${DOCKER_IMAGE}").inside('-u root') {
+                docker.image("${DOCKER_IMAGE}").inside('-u 995:991') {
                     sh 'npx standard'
                   }
                 }
@@ -57,6 +58,7 @@ pipeline {
                 sh 'npm test'
             }
         }
+
 
         stage('Build Application') {
             steps {
