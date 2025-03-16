@@ -34,6 +34,9 @@ pipeline {
                         // Install the latest ESLint version
                         sh 'npm install eslint@latest --save-dev'
 
+                        // Add "type": "module" to package.json
+                        sh 'npm pkg set type=module'
+
                         // Create a basic ESLint configuration file (eslint.config.js)
                         sh '''
                             echo "export default [
