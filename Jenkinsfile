@@ -30,18 +30,18 @@ pipeline {
                 }
             }
         }
-        /*stage('Run ESLint') {
+        stage('Run ESLint') {
             steps {
                 script {
                 // Run ESLint for code linting
-                docker.image("${DOCKER_IMAGE}").inside('-u 995:991') {
-                    sh 'npm install -g eslint'
-                    sh 'eslint .'
+                docker.image("${DOCKER_IMAGE}").inside('-u root') {
+                    sh 'npx eslint . --max-warnings 0'
                   }
                 }
     
             }
         }
+        /*
         stage('RunLint') {
             steps {
                 script {
