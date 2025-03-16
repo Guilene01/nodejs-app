@@ -36,6 +36,7 @@ pipeline {
                 // Run ESLint for code linting
                 docker.image("${DOCKER_IMAGE}").inside('-u root') {
                     sh 'npm install eslint --save-dev'
+                    sh 'npx eslint --init'
                     sh 'npx eslint . --max-warnings 0'
                   }
                 }
