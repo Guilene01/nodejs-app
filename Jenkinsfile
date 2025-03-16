@@ -9,6 +9,8 @@ pipeline {
         SONAQUBE_INSTALLATION = 'sonar'
         APP_NAME = 'nodejs-app'
         SCANNER_HOME = tool 'sonar-env'
+        SONARQUBE_IMAGE = 'sonarsource/sonar-scanner-cli:latest'
+        
     }
 
     stages {
@@ -74,14 +76,14 @@ pipeline {
         stage('SonarQube Scan') {
             steps {
                 script {
-                    docker.image("${DOCKER_IMAGE}").inside('-u root') {
+                    docker.image("${SONARQUBE_IMAGE}").inside('-u root') {
                         withSonarQubeEnv(credentialsId: "${SONAQUBE_CRED}", installationName: "${SONAQUBE_INSTALLATION}") {
                             sh '''
-                                $SCANNER_HOME/bin/sonar-scanner \
+                            sonar-scanner \
                                 -Dsonar.projectName=${APP_NAME} \
                                 -Dsonar.projectKey=${APP_NAME} \
                                 -Dsonar.sources=. \
-                                -Dsonar.java.binaries=.
+                                -Dsonar.java.binaries=.    
                             '''
                         }
                     }
