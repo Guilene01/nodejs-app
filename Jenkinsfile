@@ -22,8 +22,8 @@ pipeline {
                 script {
                     // Run the Node.js container for building and testing
                     docker.image("${DOCKER_IMAGE}").inside('-u 995:991') {
-                        sh 'npm ci'
-                        sh 'mkdir -p ~/.npm && chown -R 995:991 ~/.npm'
+                        sh 'npm install'
+                        
                         
 
                     }
