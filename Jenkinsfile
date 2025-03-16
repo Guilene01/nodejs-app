@@ -94,7 +94,7 @@ pipeline {
     steps {
         script {
             docker.image("${DOCKER_IMAGE}").inside('-u root') {
-                sh 'npm test -- --watchAll=false'
+                sh 'npm test -- --coverage'
             }
         }
     }
