@@ -5,12 +5,15 @@ pipeline {
         DOCKER_IMAGE = 'node:18' // Specify the Node.js Docker image you want to use
         GIT_BRANCH = 'main'
         GIT_URL = 'https://github.com/Guilene01/nodejs-app.git'
+        SONAQUBE_CRED = 'sonarqube-cred'
+        SONAQUBE_INSTALLATION = 'Sonar'
+        APP_NAME = 'nodejs-app'
+        SCANNER_HOME = tool 'sonar-env'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                // Checkout the code from your version control system (e.g., Git)
                 git branch: "${GIT_BRANCH}", url: "${GIT_URL}"
             }
         }
@@ -64,6 +67,23 @@ pipeline {
                     // Run ESLint for code linting
                     docker.image("${DOCKER_IMAGE}").inside('-u root') {
                         sh 'npx eslint . --max-warnings 0 --fix'
+                    }
+                }
+            }
+        }
+        stage('SonarQube Scan') {
+            steps {
+                script {
+                    docker.image("${DOCKER_IMAGE}").inside('-u root') {
+                        withSonarQubeEnv(credentialsId: "${SONAQUBE_CRED}", installationName: "${SONAQUBE_INSTALLATION}") {
+                            sh '''
+                                $SCANNER_HOME/bin/sonar-scanner \
+                                -Dsonar.projectName=${APP_NAME} \
+                                -Dsonar.projectKey=${APP_NAME} \
+                                -Dsonar.sources=. \
+                                -Dsonar.java.binaries=.
+                            '''
+                        }
                     }
                 }
             }
