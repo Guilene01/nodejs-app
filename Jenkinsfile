@@ -6,7 +6,7 @@ pipeline {
         GIT_BRANCH = 'main'
         GIT_URL = 'https://github.com/Guilene01/nodejs-app.git'
         SONAQUBE_CRED = 'sonarqube-cred'
-        SONAQUBE_INSTALLATION = 'Sonar'
+        SONAQUBE_INSTALLATION = 'sonar'
         APP_NAME = 'nodejs-app'
         SCANNER_HOME = tool 'sonar-env'
     }
