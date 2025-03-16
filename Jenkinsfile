@@ -38,7 +38,7 @@ pipeline {
                 }
     
             }
-        }*/
+        }
         stage('RunLint') {
             steps {
                 script {
