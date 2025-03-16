@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     // Run the Node.js container for building and testing
-                    docker.image("${DOCKER_IMAGE}").inside('-u 995:991') {
+                    docker.image("${DOCKER_IMAGE}").inside('-u root') {
                         sh 'npm install'
                         
                         
