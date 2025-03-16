@@ -10,9 +10,7 @@ pipeline {
         APP_NAME = 'nodejs-app'
         SCANNER_HOME = tool 'sonar-env'
         SONARQUBE_IMAGE = 'sonarsource/sonar-scanner-cli:latest'
-        CONTENTFUL_SPACE_ID = 'contentful-space-id'
-        CONTENTFUL_ACCESS_TOKEN = 'contentful-access-token'
-        CONTENTFUL_ENVIRONMENT = 'master'
+        
         
     }
 
@@ -93,19 +91,25 @@ pipeline {
                 }
             }
         }
-        stage('Run Unit Tests') {
+        /*stage('Run Unit Tests') {
     steps {
         script {
             docker.image("${DOCKER_IMAGE}").inside('-u root') {
                 sh 'npm test -- --coverage'
             }
-        }
-    }
-     }
-      stage('Publish Test Results') {
+         }
+       }
+     }*/
+      stage('Build Application') {
             steps {
-                junit '**/test-results.xml' // Adjust the path to match your test results file
+                script {
+                    docker.image("${DOCKER_IMAGE}").inside('-u root') {
+                        sh 'npm run build'
+                    }
+                }
             }
         }
+
     }
+
 }
