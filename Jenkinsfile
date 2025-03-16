@@ -63,7 +63,7 @@ pipeline {
                 script {
                     // Run ESLint for code linting
                     docker.image("${DOCKER_IMAGE}").inside('-u root') {
-                        sh 'npx eslint . --max-warnings 0'
+                        sh 'npx eslint . --max-warnings 0 --fix'
                     }
                 }
             }
