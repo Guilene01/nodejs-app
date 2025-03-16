@@ -37,7 +37,6 @@ pipeline {
                 docker.image("${DOCKER_IMAGE}").inside('-u root') {
                     sh 'npm install eslint@latest --save-dev'
                     sh 'npx eslint --init --yes --config standard ext .js'
-                    sh 'npx eslint --fix .'
                     sh 'npx eslint . --max-warnings 0'
                   }
                 }
