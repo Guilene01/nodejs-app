@@ -1,3 +1,7 @@
+require('dotenv').config();
+console.log('Contentful Space ID:', process.env.CONTENTFUL_SPACE_ID);
+console.log('Contentful Access Token:', process.env.CONTENTFUL_ACCESS_TOKEN);
+
 const path = require('path')
 
 const bodyParser = require('body-parser')
