@@ -90,5 +90,14 @@ pipeline {
                 }
             }
         }
+        stage('Run Unit Tests') {
+    steps {
+        script {
+            docker.image("${DOCKER_IMAGE}").inside('-u root') {
+                sh 'npm test'
+            }
+        }
+    }
+}
     }
 }
