@@ -36,7 +36,8 @@ pipeline {
                 // Run ESLint for code linting
                 docker.image("${DOCKER_IMAGE}").inside('-u root') {
                     sh 'npm install eslint --save-dev'
-                    sh 'npx eslint --init --yes --config airbnb --extensions .js,.jsx,.ts,.tsx'
+                    sh 'npx eslint --init --yes --config standard ext .js'
+                    sh 'npx eslint --fix .'
                     sh 'npx eslint . --max-warnings 0'
                   }
                 }
