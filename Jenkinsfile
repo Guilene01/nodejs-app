@@ -98,6 +98,11 @@ pipeline {
             }
         }
     }
-}
+     }
+      stage('Publish Test Results') {
+            steps {
+                junit '**/test-results.xml' // Adjust the path to match your test results file
+            }
+        }
     }
 }
