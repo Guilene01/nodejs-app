@@ -10,8 +10,8 @@ pipeline {
         APP_NAME = 'nodejs-app'
         SCANNER_HOME = tool 'sonar-env'
         SONARQUBE_IMAGE = 'sonarsource/sonar-scanner-cli:latest'
-        CONTENTFUL_SPACE_ID = credentials('contentful-space-id')
-        CONTENTFUL_ACCESS_TOKEN = credentials('contentful-access-token')
+        CONTENTFUL_SPACE_ID = 'contentful-space-id'
+        CONTENTFUL_ACCESS_TOKEN = 'contentful-access-token'
         CONTENTFUL_ENVIRONMENT = 'master'
         
     }
