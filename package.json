@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "build": "echo 'Build step completed'",
     "start:watch": "nodemon ./bin/www --ignore public/",
     "start:dev": "node ./bin/www",
     "debug": "node debug ./bin/www",
